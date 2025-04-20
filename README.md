@@ -26,7 +26,7 @@ This project is a simple **Python-based interpreter** built for an APL (Advanced
    input> print(y);
    input> end
 
-   ✅ Expected Output
+5. ✅ Expected Output
     ====== Lexer Output ======
     [LET, ID, ASSIGN, NUMBER, PLUS, NUMBER, SEMICOLON]
     [LET, ID, ASSIGN, ID, MUL, NUMBER, SEMICOLON]
