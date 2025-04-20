@@ -87,6 +87,17 @@ class Lexer:
             return Token(TokenType.ID, self.text[start:self.pos])
 
         # Numbers (integers and floats)
+        # if current_char.isdigit():
+        #     start = self.pos
+        #     while self.pos < len(self.text) and self.text[self.pos].isdigit():
+        #         self.pos += 1
+        #     if self.pos < len(self.text) and self.text[self.pos] == '.':
+        #         self.pos += 1
+        #         while self.pos < len(self.text) and self.text[self.pos].isdigit():
+        #             self.pos += 1
+        #     return Token(TokenType.NUMBER, self.text[start:self.pos])
+
+        # Inside the Lexer's get_next_token() method (number handling section):
         if current_char.isdigit():
             start = self.pos
             while self.pos < len(self.text) and self.text[self.pos].isdigit():
@@ -95,7 +106,13 @@ class Lexer:
                 self.pos += 1
                 while self.pos < len(self.text) and self.text[self.pos].isdigit():
                     self.pos += 1
-            return Token(TokenType.NUMBER, self.text[start:self.pos])
+            num_str = self.text[start:self.pos]
+            # Convert to int or float
+            if '.' in num_str:
+                value = float(num_str)
+            else:
+                value = int(num_str)
+            return Token(TokenType.NUMBER, value)  # Now stores int/float instead of str
 
         # String literals
         if current_char in ('"', "'"):

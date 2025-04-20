@@ -15,15 +15,30 @@ class Parser:
         """Return the current token or None if at the end."""
         return self.tokens[self.pos] if self.pos < len(self.tokens) else None
 
+    # def parse(self):
+    #     """Parse the tokenized input and construct an AST."""
+    #     nodes = []
+    #     while self.current_token() is not None:
+    #         node = self.statement()
+    #         if node:
+    #             nodes.append(node)
+    #         else:
+    #             # If no valid statement, move to next token to avoid infinite loop
+    #             self.consume()
+    #     return nodes
+
+    # In the Parser's parse() method:
     def parse(self):
         """Parse the tokenized input and construct an AST."""
         nodes = []
         while self.current_token() is not None:
             node = self.statement()
             if node:
-                nodes.append(node)
+                if isinstance(node, list):
+                    nodes.extend(node)  # Flatten lists
+                else:
+                    nodes.append(node)  # Append single nodes
             else:
-                # If no valid statement, move to next token to avoid infinite loop
                 self.consume()
         return nodes
 
