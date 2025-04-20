@@ -14,10 +14,12 @@ This project is a simple **Python-based interpreter** built for an APL (Advanced
 2. Open the repository folder in Visual Studio Code or your preferred code editor.
 
 3. Run the interpreter from the terminal:
+   ```bash
    python main.py
    
-   🧪 Example Usage
+4. 🧪 Example Usage
    Once the program is running, enter the following inputs:
+   ```bash
    input> let x = 10 + 5;
    input> let y = x * 2;
    input> print(x);
