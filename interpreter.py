@@ -1,16 +1,14 @@
 from ast_nodes import *
 
-# Interpreter class — responsible for executing the AST produced by the parser
+# Interpreter class 
 class Interpreter:
     def __init__(self):
-        # Dictionary to store variables and their assigned values
-        self.variables = {}
+        
+        self.variables = {} # Store variables and their assigned values
 
-    # Main method to interpret a list of AST nodes
-    def interpret(self, nodes):
+    def interpret(self, nodes):  # Main function for interpret a list of AST nodes
         for node in nodes:
-            # In case node is a list (e.g., nested statements), handle each sub-node
-            if isinstance(node, list):
+            if isinstance(node, list): # In case node is a list suh as nested statements, handle each sub-node
                 for sub_node in node:
                     self.execute(sub_node)
             else:
@@ -40,7 +38,6 @@ class Interpreter:
             if node.name in self.variables:
                 return self.variables[node.name]
             else:
-                # Handle undefined variable error
                 print(f"Error: Variable '{node.name}' is not defined.")
                 exit(1)
 
@@ -49,11 +46,10 @@ class Interpreter:
             left = self.evaluate(node.left)
             right = self.evaluate(node.right)
 
-            # Convert string numbers to float if necessary
+            # Convert string numbers to float if required
             left = float(left) if isinstance(left, str) else left
             right = float(right) if isinstance(right, str) else right
 
-            # Perform the operation based on the operator type
             if node.op == 'PLUS':
                 result = left + right
             elif node.op == 'MINUS':
@@ -63,18 +59,14 @@ class Interpreter:
             elif node.op == 'DIV':
                 result = left / right
             else:
-                # Handle unknown operators
-                print(f"Error: Unknown operator '{node.op}'.")
+                print(f"Error: Unknown operator '{node.op}'.") # Print unknown operators
                 exit(1)
-
-            # If both operands were integers, return an integer result
-            if isinstance(left, int) and isinstance(right, int):
+            
+            if isinstance(left, int) and isinstance(right, int): # If both operands were integers, return an integer value
                 return int(result)
 
-            # Return the result as a float otherwise
             return result
 
         else:
-            # Catch-all for unrecognized node types
-            print(f"Error: Unknown node type '{type(node)}'.")
+            print(f"Error: Unknown node type '{type(node)}'.") # Catch unrecognize node type
             exit(1)
