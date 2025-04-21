@@ -2,8 +2,8 @@ from lexer import Lexer
 from parser import Parser
 from interpreter import Interpreter
 
-# Main function — acts as the entry point of the program.
-# It handles user input, tokenization, parsing, and interpretation.
+# Main function this is the entry point of the program.
+# Hndles user input, tokenization, parsing, and interpretation.
 def main():
     # Prompt user for code input line-by-line until they type 'end'
     print("Enter your code (type 'end' to finish):")
@@ -35,13 +35,10 @@ def main():
         # Flatten tokenized lines into a single list of tokens
         parser = Parser([token for line in tokenized_output for token in line])
         ast = parser.parse()
-        
-        # Display the resulting AST nodes
         for node in ast:
             print(node)
     
     except SyntaxError as e:
-        # Handle syntax errors and stop execution if parsing fails
         print(f"Syntax Error: {e}")
         return
 
